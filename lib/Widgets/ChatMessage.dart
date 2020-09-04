@@ -10,7 +10,7 @@ class ChatMessage extends StatelessWidget {
   Row alphaMessage(context) {
     return Row(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
       Container(
-        margin: const EdgeInsets.only(right: 16.0),
+        margin: const EdgeInsets.only(right: 10.0),
         child: CircleAvatar(
           radius: 18,
           backgroundImage: AssetImage('assets/robot.png'),
@@ -21,13 +21,25 @@ class ChatMessage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              this.name,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+//            Text(
+//              this.name,
+//              style: TextStyle(fontWeight: FontWeight.bold),
+//            ),
             Container(
-              margin: const EdgeInsets.only(top: 5.0),
-              child: Text(text),
+              margin: const EdgeInsets.only(top: 5.0, right: 50),
+              padding: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(10.0),
+                  bottomRight: Radius.circular(10.0),
+                  bottomLeft: Radius.circular(10.0),
+                ),
+                color: Colors.black54,
+              ),
+              child: Text(
+                text,
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),
@@ -43,25 +55,41 @@ class ChatMessage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              Text(
-                this.name,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+//              Text(
+//                this.name,
+//                style: TextStyle(fontWeight: FontWeight.bold),
+//              ),
               Container(
-                margin: const EdgeInsets.only(top: 5.0),
-                child: Text(text),
+                margin: const EdgeInsets.only(top: 5.0, left: 50, right: 10),
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
+                    bottomLeft: Radius.circular(30.0),
+                  ),
+                  color: Color(0xff38ef7d),
+                ),
+                child: Text(
+                  text,
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ],
           ),
         ),
         Container(
-          margin: const EdgeInsets.only(left: 16.0),
-          child: CircleAvatar(
-              child: Text(
-            this.name[0],
-            style: TextStyle(fontWeight: FontWeight.bold),
-          )),
-        ),
+//          margin: const EdgeInsets.only(left: 10.0),
+//          child: CircleAvatar(
+//            backgroundColor: Colors.black,
+//            backgroundImage: AssetImage('assets/person.png'),
+////              child: Text(
+////                this.name[0],
+////                style:
+////                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+////              )
+//          ),
+            ),
       ],
     );
   }

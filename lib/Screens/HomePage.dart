@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     );
     setState(() {
       _messages.insert(0, message);
+      _messageText = "";
     });
   }
 
@@ -64,17 +65,32 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Container(
+//              color: Color(0xffBBEC6C),
+              padding: const EdgeInsets.symmetric(vertical: 5),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                    child: Container(
+//                      color: Color(0xffBBEC6C),
+                      height: 40,
+                      margin: EdgeInsets.symmetric(horizontal: 5),
                       child: TextField(
                         decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(vertical: 15),
-                            hintText: 'enter message'),
+                          contentPadding:
+                              EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                          hintText: 'enter message',
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color(0xff62DBFB), width: 2.0),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color(0xff38ef7d), width: 2.0),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                        ),
                         controller: _messageTextController,
                         onChanged: (value) {
                           _messageText = value;
@@ -82,24 +98,52 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  FlatButton(
-                    onPressed: () {
-                      if (_messageText != "") {
-                        _messageTextController.clear();
-                        ChatMessage message = new ChatMessage(
-                          text: _messageText,
-                          name: "Me",
-                          type: true,
-                        );
-                        setState(() {
-                          _messages.insert(0, message);
-                        });
-                        dfResponse(_messageText);
-                      }
-                    },
-                    child: Text(
-                      'Send',
+                  CircleAvatar(
+                    backgroundColor: Color(0xff38ef7d),
+                    radius: 25,
+                    child: Center(
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.send,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          if (_messageText != "") {
+                            _messageTextController.clear();
+                            ChatMessage message = new ChatMessage(
+                              text: _messageText,
+                              name: "You",
+                              type: true,
+                            );
+                            setState(() {
+                              _messages.insert(0, message);
+                            });
+                            dfResponse(_messageText);
+                          }
+                        },
+                      ),
                     ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.green,
+                    radius: 25,
+                    child: Center(
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.mic,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
                   ),
                 ],
               ),
