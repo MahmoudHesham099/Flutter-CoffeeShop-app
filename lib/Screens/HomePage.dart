@@ -1,7 +1,11 @@
+import 'dart:math';
+
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:flutter_dialogflow/utils/language.dart';
 import 'package:flutterchatbot/Widgets/ChatMessage.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,9 +16,61 @@ class _HomePageState extends State<HomePage> {
   final _messageTextController = TextEditingController();
   String _messageText = "";
   final List<ChatMessage> _messages = <ChatMessage>[];
+  stt.SpeechToText _speech;
+  bool _isListening = false;
+  double _confidence = 1.0;
+
+  void voice() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        setState(() {
+          _isListening = true;
+        });
+        _speech.listen(onResult: (val) {
+          print('111111111');
+          setState(() {
+            print(val);
+            print('bbbbbbb');
+            print("valll" + val.recognizedWords);
+            _messageText = val.recognizedWords;
+            if (val.hasConfidenceRating && val.confidence > 0) {
+              _confidence = val.confidence;
+            }
+          });
+        });
+      }
+    } else {
+      setState(() {
+        _isListening = false;
+      });
+      _speech.stop();
+      if (_messageText != "") {
+        print('aaaaaaaaaaa');
+        print(_messageText);
+        WidgetsBinding.instance
+            .addPostFrameCallback((_) => _messageTextController.clear());
+        ChatMessage message = new ChatMessage(
+          text: _messageText,
+          name: "You",
+          type: true,
+        );
+        setState(() {
+          _messages.insert(0, message);
+        });
+        dfResponse(_messageText);
+      } else {
+        print('oooooooo');
+      }
+    }
+  }
 
   void dfResponse(query) async {
-    _messageTextController.clear();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _messageTextController.clear());
     AuthGoogle authGoogle =
         await AuthGoogle(fileJson: "assets/credentials.json").build();
     Dialogflow dialogFlow =
@@ -30,6 +86,12 @@ class _HomePageState extends State<HomePage> {
       _messages.insert(0, message);
       _messageText = "";
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _speech = stt.SpeechToText();
   }
 
   @override
@@ -77,8 +139,30 @@ class _HomePageState extends State<HomePage> {
                       margin: EdgeInsets.symmetric(horizontal: 5),
                       child: TextField(
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              Icons.send,
+                              color: Color(0xff38ef7d),
+//                                  size: 30,
+                            ),
+                            onPressed: () {
+                              if (_messageText != "") {
+                                WidgetsBinding.instance.addPostFrameCallback(
+                                    (_) => _messageTextController.clear());
+                                ChatMessage message = new ChatMessage(
+                                  text: _messageText,
+                                  name: "You",
+                                  type: true,
+                                );
+                                setState(() {
+                                  _messages.insert(0, message);
+                                });
+                                dfResponse(_messageText);
+                              }
+                            },
+                          ),
                           contentPadding:
-                              EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                              EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                           hintText: 'enter message',
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -98,52 +182,25 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  CircleAvatar(
-                    backgroundColor: Color(0xff38ef7d),
-                    radius: 25,
-                    child: Center(
+                  AvatarGlow(
+                    animate: _isListening,
+                    glowColor: Colors.green,
+                    endRadius: 35.0,
+                    duration: const Duration(milliseconds: 2000),
+                    repeatPauseDuration: const Duration(milliseconds: 100),
+                    repeat: true,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.green,
+                      radius: 20,
                       child: IconButton(
                         icon: Icon(
-                          Icons.send,
+                          _isListening ? Icons.mic : Icons.mic_none,
                           color: Colors.white,
-                          size: 30,
+                          size: 25,
                         ),
-                        onPressed: () {
-                          if (_messageText != "") {
-                            _messageTextController.clear();
-                            ChatMessage message = new ChatMessage(
-                              text: _messageText,
-                              name: "You",
-                              type: true,
-                            );
-                            setState(() {
-                              _messages.insert(0, message);
-                            });
-                            dfResponse(_messageText);
-                          }
-                        },
+                        onPressed: voice,
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Colors.green,
-                    radius: 25,
-                    child: Center(
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.mic,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
                   ),
                 ],
               ),
