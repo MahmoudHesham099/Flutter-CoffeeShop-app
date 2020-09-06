@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
@@ -18,7 +16,6 @@ class _HomePageState extends State<HomePage> {
   final List<ChatMessage> _messages = <ChatMessage>[];
   stt.SpeechToText _speech;
   bool _isListening = false;
-  double _confidence = 1.0;
 
   void voice() async {
     if (!_isListening) {
@@ -27,44 +24,17 @@ class _HomePageState extends State<HomePage> {
         onError: (val) => print('onError: $val'),
       );
       if (available) {
-        setState(() {
-          _isListening = true;
-        });
-        _speech.listen(onResult: (val) {
-          print('111111111');
-          setState(() {
-            print(val);
-            print('bbbbbbb');
-            print("valll" + val.recognizedWords);
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) => setState(() {
             _messageText = val.recognizedWords;
-            if (val.hasConfidenceRating && val.confidence > 0) {
-              _confidence = val.confidence;
-            }
-          });
-        });
+            print(_messageText);
+          }),
+        );
       }
     } else {
-      setState(() {
-        _isListening = false;
-      });
+      setState(() => _isListening = false);
       _speech.stop();
-      if (_messageText != "") {
-        print('aaaaaaaaaaa');
-        print(_messageText);
-        WidgetsBinding.instance
-            .addPostFrameCallback((_) => _messageTextController.clear());
-        ChatMessage message = new ChatMessage(
-          text: _messageText,
-          name: "You",
-          type: true,
-        );
-        setState(() {
-          _messages.insert(0, message);
-        });
-        dfResponse(_messageText);
-      } else {
-        print('oooooooo');
-      }
     }
   }
 
@@ -128,7 +98,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Container(
 //              color: Color(0xffBBEC6C),
-              padding: const EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -182,26 +152,26 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  AvatarGlow(
-                    animate: _isListening,
-                    glowColor: Colors.green,
-                    endRadius: 35.0,
-                    duration: const Duration(milliseconds: 2000),
-                    repeatPauseDuration: const Duration(milliseconds: 100),
-                    repeat: true,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.green,
-                      radius: 20,
-                      child: IconButton(
-                        icon: Icon(
-                          _isListening ? Icons.mic : Icons.mic_none,
-                          color: Colors.white,
-                          size: 25,
-                        ),
-                        onPressed: voice,
-                      ),
-                    ),
-                  ),
+//                  AvatarGlow(
+//                    animate: _isListening,
+//                    glowColor: Colors.green,
+//                    endRadius: 35.0,
+//                    duration: const Duration(milliseconds: 2000),
+//                    repeatPauseDuration: const Duration(milliseconds: 100),
+//                    repeat: true,
+//                    child: CircleAvatar(
+//                      backgroundColor: Colors.green,
+//                      radius: 20,
+//                      child: IconButton(
+//                        icon: Icon(
+//                          _isListening ? Icons.mic : Icons.mic_none,
+//                          color: Colors.white,
+//                          size: 25,
+//                        ),
+//                        onPressed: voice,
+//                      ),
+//                    ),
+//                  ),
                 ],
               ),
             )
