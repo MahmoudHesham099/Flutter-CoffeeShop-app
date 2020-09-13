@@ -67,27 +67,36 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+//      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Color(0xffFF5722),
+        title: Text(
+          'Flutter-Chatbot',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Center(
-              child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                height: 100,
-                width: 200,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(22),
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage('assets/alpha.png'),
-                    )),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Divider(),
-            ),
+//            Center(
+//              child: Container(
+//                margin: const EdgeInsets.symmetric(vertical: 10),
+//                height: 100,
+//                width: 200,
+//                decoration: BoxDecoration(
+//                    borderRadius: BorderRadius.circular(22),
+//                    image: DecorationImage(
+//                      fit: BoxFit.fill,
+//                      image: AssetImage('assets/alpha.png'),
+//                    )),
+//              ),
+//            ),
+
             Flexible(
               child: new ListView.builder(
                 padding: new EdgeInsets.all(8.0),
@@ -98,21 +107,21 @@ class _HomePageState extends State<HomePage> {
             ),
             Container(
 //              color: Color(0xffBBEC6C),
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
                     child: Container(
 //                      color: Color(0xffBBEC6C),
-                      height: 40,
+                      height: 50,
                       margin: EdgeInsets.symmetric(horizontal: 5),
                       child: TextField(
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
                             icon: Icon(
                               Icons.send,
-                              color: Color(0xff38ef7d),
+                              color: Color(0xffFF5722),
 //                                  size: 30,
                             ),
                             onPressed: () {
@@ -136,13 +145,13 @@ class _HomePageState extends State<HomePage> {
                           hintText: 'enter message',
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Color(0xff62DBFB), width: 2.0),
-                            borderRadius: BorderRadius.circular(25),
+                                color: Color(0xffFF5722), width: 2.0),
+                            borderRadius: BorderRadius.circular(5),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Color(0xff38ef7d), width: 2.0),
-                            borderRadius: BorderRadius.circular(25),
+                                color: Color(0xffFF5722), width: 2.0),
+                            borderRadius: BorderRadius.circular(5),
                           ),
                         ),
                         controller: _messageTextController,

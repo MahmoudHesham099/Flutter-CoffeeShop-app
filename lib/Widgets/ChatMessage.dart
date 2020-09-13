@@ -13,8 +13,12 @@ class ChatMessage extends StatelessWidget {
         margin: const EdgeInsets.only(right: 10.0),
         child: CircleAvatar(
           radius: 18,
-          backgroundImage: AssetImage('assets/robot.png'),
-          backgroundColor: Colors.white,
+//          backgroundImage: AssetImage('assets/robot.png'),
+          backgroundColor: Color(0xffFF5722),
+          child: Icon(
+            Icons.computer,
+            color: Colors.white,
+          ),
         ),
       ),
       Expanded(
@@ -26,13 +30,13 @@ class ChatMessage extends StatelessWidget {
 //              style: TextStyle(fontWeight: FontWeight.bold),
 //            ),
             Container(
-              margin: const EdgeInsets.only(top: 5.0, right: 50),
+              margin: const EdgeInsets.only(right: 50),
               padding: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(10.0),
-                  bottomRight: Radius.circular(10.0),
-                  bottomLeft: Radius.circular(10.0),
+                  topRight: Radius.circular(5.0),
+                  bottomRight: Radius.circular(5.0),
+                  topLeft: Radius.circular(5.0),
                 ),
                 color: Colors.black54,
               ),
@@ -64,15 +68,15 @@ class ChatMessage extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
-                    bottomLeft: Radius.circular(30.0),
+                    topLeft: Radius.circular(5.0),
+                    topRight: Radius.circular(5.0),
+                    bottomLeft: Radius.circular(5.0),
                   ),
-                  color: Color(0xff38ef7d),
+                  color: Color(0xffFF5722),
                 ),
                 child: Text(
                   text,
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ],
