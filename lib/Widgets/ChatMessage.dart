@@ -1,11 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ChatMessage extends StatelessWidget {
-  ChatMessage({this.text, this.name, this.type});
+  ChatMessage({this.message, this.name, this.type, this.imageUri});
 
-  final String text;
+  final String message;
   final String name;
   final bool type;
+  final String imageUri;
 
   Row alphaMessage(context) {
     return Row(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
@@ -25,10 +27,6 @@ class ChatMessage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-//            Text(
-//              this.name,
-//              style: TextStyle(fontWeight: FontWeight.bold),
-//            ),
             Container(
               margin: const EdgeInsets.only(right: 50),
               padding: const EdgeInsets.all(10.0),
@@ -40,9 +38,18 @@ class ChatMessage extends StatelessWidget {
                 ),
                 color: Colors.black54,
               ),
-              child: Text(
-                text,
-                style: TextStyle(color: Colors.white),
+              child: Column(
+                children: [
+                  Text(
+                    message,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  imageUri == null
+                      ? Container()
+                      : CachedNetworkImage(
+                          imageUrl: imageUri,
+                        ),
+                ],
               ),
             ),
           ],
@@ -75,7 +82,7 @@ class ChatMessage extends StatelessWidget {
                   color: Color(0xffFF5722),
                 ),
                 child: Text(
-                  text,
+                  message,
                   style: TextStyle(color: Colors.white),
                 ),
               ),

@@ -46,12 +46,21 @@ class _HomePageState extends State<HomePage> {
     Dialogflow dialogFlow =
         Dialogflow(authGoogle: authGoogle, language: Language.english);
     AIResponse response = await dialogFlow.detectIntent(query);
+    print(response.getListMessage());
+    String img;
+    try {
+      img = response.getListMessage()[1]['image']["imageUri"];
+    } catch (e) {
+      print(e);
+    }
     ChatMessage message = new ChatMessage(
-      text: response.getMessage() ??
+      message: response.getMessage() ??
           new CardDialogflow(response.getListMessage()[0]).title,
       name: "Alpha",
       type: false,
+      imageUri: img,
     );
+
     setState(() {
       _messages.insert(0, message);
       _messageText = "";
@@ -129,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                                 WidgetsBinding.instance.addPostFrameCallback(
                                     (_) => _messageTextController.clear());
                                 ChatMessage message = new ChatMessage(
-                                  text: _messageText,
+                                  message: _messageText,
                                   name: "You",
                                   type: true,
                                 );
