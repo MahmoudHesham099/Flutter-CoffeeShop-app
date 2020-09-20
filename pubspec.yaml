@@ -27,6 +27,7 @@ dependencies:
   speech_to_text: ^2.5.0
   avatar_glow: ^1.2.0
   cached_network_image: ^2.3.2+1
+  google_fonts: ^1.1.0
 
 dev_dependencies:
   flutter_test:
