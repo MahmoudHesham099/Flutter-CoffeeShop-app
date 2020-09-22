@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 List packages = [
   {
-    'name': 'THE SUPREME',
-    'img': 'assets/package3.png',
-    'price': 11.00,
-    'rate': 4.5,
-    'color': Color(0xff8ac8b9),
-  },
-  {
     'name': 'BLACK COFFEE',
     'img': 'assets/package4.png',
     'price': 13.00,
     'rate': 4.5,
     'color': Color(0xff322e2f),
+  },
+  {
+    'name': 'THE SUPREME',
+    'img': 'assets/package3.png',
+    'price': 11.00,
+    'rate': 4.5,
+    'color': Color(0xff8ac8b9),
   },
   {
     'name': 'BRUGH',

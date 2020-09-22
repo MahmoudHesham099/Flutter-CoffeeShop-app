@@ -16,66 +16,67 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-//        toolbarHeight: 100,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
+        children: [
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Welcome to',
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                    fontSize: 15,
-                    color: Colors.white,
-                  ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Welcome to',
+                      style: GoogleFonts.lato(
+                        textStyle: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      'Our Coffee Shop',
+                      style: GoogleFonts.lato(
+                        textStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Text(
-                'Our Coffee Shop',
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: AvatarGlow(
+                  endRadius: 20,
+                  glowColor: Colors.black,
+                  duration: Duration(milliseconds: 2000),
+                  repeat: true,
+                  child: GestureDetector(
+                    child: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.white30,
+                      backgroundImage: AssetImage(
+                        'assets/order.png',
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ChatPage()),
+                      );
+                    },
                   ),
                 ),
               ),
             ],
           ),
-        ),
-        backgroundColor: Color(0xffca9863),
-        elevation: 0.0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: AvatarGlow(
-              endRadius: 20,
-              glowColor: Colors.black,
-              duration: Duration(milliseconds: 2000),
-              repeat: true,
-              child: GestureDetector(
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white30,
-                  backgroundImage: AssetImage(
-                    'assets/order.png',
-                  ),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ChatPage()),
-                  );
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: ListView(
-        children: [
           SizedBox(
             height: 20,
           ),
@@ -96,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                       height: 130,
                       width: 150,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(22),
+                        borderRadius: BorderRadius.circular(15),
                         color: Colors.grey,
                         image: DecorationImage(
                           fit: BoxFit.fill,
@@ -116,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                           style: GoogleFonts.lato(
                             textStyle: TextStyle(
                               fontSize: 15,
-                              color: Color(0xffbe7656),
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -175,7 +176,7 @@ class _HomePageState extends State<HomePage> {
               style: GoogleFonts.lato(
                 textStyle: TextStyle(
                   fontSize: 18,
-                  color: Color(0xffbe7656),
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -199,6 +200,9 @@ class _HomePageState extends State<HomePage> {
                     color: package['color'],
                   );
                 }),
+          ),
+          SizedBox(
+            height: 10,
           ),
         ],
       ),

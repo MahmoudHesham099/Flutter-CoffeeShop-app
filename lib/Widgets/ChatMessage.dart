@@ -36,9 +36,10 @@ class ChatMessage extends StatelessWidget {
                   bottomRight: Radius.circular(5.0),
                   topLeft: Radius.circular(5.0),
                 ),
-                color: Colors.black54,
+                color: Colors.black,
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     message,
@@ -46,8 +47,15 @@ class ChatMessage extends StatelessWidget {
                   ),
                   imageUri == null
                       ? Container()
-                      : CachedNetworkImage(
-                          imageUrl: imageUri,
+                      : Column(
+                          children: [
+                            SizedBox(
+                              height: 5,
+                            ),
+                            CachedNetworkImage(
+                              imageUrl: imageUri,
+                            ),
+                          ],
                         ),
                 ],
               ),

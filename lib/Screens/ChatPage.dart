@@ -81,17 +81,17 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 0),
           child: CircleAvatar(
             radius: 20,
             backgroundColor: Colors.white30,
-            backgroundImage: AssetImage('assets/chat&order.png'),
+            backgroundImage: AssetImage('assets/order.png'),
           ),
         ),
         title: Text('Order Now',
             style: GoogleFonts.lato(
               textStyle: TextStyle(
-                color: Color(0xffE64C3C),
+                color: Colors.black,
                 fontSize: 20,
                 fontStyle: FontStyle.italic,
               ),
@@ -125,7 +125,7 @@ class _ChatPageState extends State<ChatPage> {
                           suffixIcon: IconButton(
                             icon: Icon(
                               Icons.send,
-                              color: Color(0xffE64C3C),
+                              color: Colors.black,
 //                                  size: 30,
                             ),
                             onPressed: () {
@@ -148,13 +148,13 @@ class _ChatPageState extends State<ChatPage> {
                               EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                           hintText: 'enter message',
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xffE64C3C), width: 2.0),
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 2.0),
                             borderRadius: BorderRadius.circular(5),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xffE64C3C), width: 2.0),
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 2.0),
                             borderRadius: BorderRadius.circular(5),
                           ),
                         ),
