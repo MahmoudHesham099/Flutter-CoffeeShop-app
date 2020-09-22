@@ -1,6 +1,7 @@
-# flutterchatbot
+# Coffee Shop App
 
-A new Flutter application.
+A Flutter&Dialogflow Coffee shop app (Home Screen UI + Chatbot to make an order).
+![alt text](assets/coffeeShopApp.gif)
 
 ## Getting Started
 
