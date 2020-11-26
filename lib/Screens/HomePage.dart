@@ -202,7 +202,42 @@ class _HomePageState extends State<HomePage> {
                 }),
           ),
           SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Text(
+              'Newest Products',
+              style: GoogleFonts.lato(
+                textStyle: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
             height: 10,
+          ),
+          Container(
+            height: 280.0,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: packages.length,
+                itemBuilder: (context, index) {
+                  var package = packages[packages.length - (index + 1)];
+                  return CoffeeContainer(
+                    name: package["name"],
+                    img: package['img'],
+                    price: package['price'],
+                    rate: package['rate'],
+                    color: package['color'],
+                  );
+                }),
+          ),
+          SizedBox(
+            height: 20,
           ),
         ],
       ),
